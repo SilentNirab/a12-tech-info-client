@@ -2,12 +2,22 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png'
 import Container from '../../../Components/Container';
 import useAuth from '../../../Hooks/useAuth';
+import Swal from 'sweetalert2'
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
 
     const handelLogOut = () => {
         logOut()
+        .then(
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Logout successfully",
+                showConfirmButton: false,
+                timer: 1500
+              })
+        )
     }
 
     const NavLinks = <>

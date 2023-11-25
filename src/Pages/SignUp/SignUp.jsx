@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
@@ -15,6 +16,13 @@ const SignUp = () => {
             .then(
                 navigate('/')
             )
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Signup successfully",
+                showConfirmButton: false,
+                timer: 1500
+            })
         })
         .catch(error => {
             console.error(error);
@@ -24,6 +32,13 @@ const SignUp = () => {
         googleSignIn()
         .then(result =>{
             console.log(result.user);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Signin successfully",
+                showConfirmButton: false,
+                timer: 1500
+              })
             navigate('/')
         })
         .then(error =>{

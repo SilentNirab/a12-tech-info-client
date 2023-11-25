@@ -1,10 +1,50 @@
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const { register, handleSubmit, } = useForm();
-    const onSubmit = data => console.log(data);
+    const navigate = useNavigate()
+    const {signIn, userProfileUpdate, googleSignIn} = useAuth()
+    const onSubmit = data => {
+        signIn(data.email, data.password)
+        .then(result => {
+            console.log(result.user);
+            userProfileUpdate(data.name, data.photoURL)
+            .then(
+                navigate('/')
+            )
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Login successfully",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    }
+    const handelGoogleSignIn = () =>{
+        googleSignIn()
+        .then(result =>{
+            console.log(result.user);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "login successfully",
+                showConfirmButton: false,
+                timer: 1500
+              })
+            navigate('/')
+        })
+        .then(error =>{
+            console.error(error);
+        })
+    }
     return (
         <div className=" min-h-screen flex items-center">
             <div className="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
@@ -34,7 +74,7 @@ const Login = () => {
                                 </Link>.
                             </p>
                             <div className="text-center form-control mt-4">
-                                <button className="text-black font-bold border-black border-2 py-2 rounded-md flex justify-center items-center px-5"> <span className="mr-2">Google</span>
+                                <button onClick={handelGoogleSignIn} className="text-black font-bold border-black border-2 py-2 rounded-md flex justify-center items-center px-5"> <span className="mr-2">Google</span>
                                     <FcGoogle className="text-xl"></FcGoogle>
                                 </button>
                             </div>
