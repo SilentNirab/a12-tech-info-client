@@ -1,6 +1,9 @@
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
+import { FcGoogle } from "react-icons/fc";
 const SignUp = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
     return (
         <div className=" min-h-screen flex items-center">
             <div className="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
@@ -10,9 +13,9 @@ const SignUp = () => {
                         <p className="mt-2 text-gray-500">Sign up below to create your account</p>
                     </div>
                     <div className="mt-5">
-                        <form action="">
+                        <form onSubmit={handleSubmit(onSubmit)} action="">
                             <div className="relative mt-6">
-                                <input type="text" name="name" id="name" placeholder="Name" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                <input {...register("name")} type="text" name="name" id="name" placeholder="Name" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
                                 <label htmlFor="name" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Name</label>
                             </div>
                             <div className="relative mt-6">
@@ -20,35 +23,35 @@ const SignUp = () => {
                                 <label htmlFor="email" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Email Address</label>
                             </div>
                             <div className="relative mt-6">
-                                <input type="password" name="password" id="password" placeholder="Password" className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                <input type="password" {...register("password", {
+                                    required: true,
+                                    minLength: 6,
+                                    maxLength: 20,
+                                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                                })} name="password" id="password" placeholder="Password" className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
+                                {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
+                                {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
+                                {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
                                 <label htmlFor="password" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Password</label>
                             </div>
                             <div className="relative mt-6">
-                                <input type="file" className="file-input file-input-bordered rounded-md w-full" />
+                                <input {...register("photoURL")} type="text" name="photoURL" id="photoURL" placeholder="PhotoURL" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                <label htmlFor="photoURL" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">PhotoURL</label>
                             </div>
 
                             <div className="my-6">
                                 <button type="submit" className="w-full rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none">Sign up</button>
                             </div>
                             <p className="text-center text-sm text-gray-500">Do you have an account yet?
-                                <Link to={'/login'}
-                                    className="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Sign in
-                                </Link>.
+                                <Link to={'/login'} >
+                                    <input className="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none" type="submit" value="Sign in" />
+                                </Link>
+
                             </p>
                             <div className="text-center form-control mt-4">
                                 <button onClick={'F'} className="text-black font-bold border-black border-2 py-2 rounded-md flex justify-center items-center px-5"> <span className="mr-2">Google</span>
-                                    <svg viewBox="0 0 48 48" className="w-5 mr-2">
-                                        <title>Google Logo</title>
-                                        <clipPath id="g">
-                                            <path d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" />
-                                        </clipPath>
-                                        <g className="colors" clipPath="url(#g)">
-                                            <path fill="#FBBC05" d="M0 37V11l17 13z" />
-                                            <path fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" />
-                                            <path fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
-                                            <path fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
-                                        </g>
-                                    </svg>
+                                    
                                 </button>
                             </div>
                         </form>
