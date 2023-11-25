@@ -1,21 +1,45 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png'
 import Container from '../../../Components/Container';
+import useAuth from '../../../Hooks/useAuth';
 
 const Navbar = () => {
+    const { user, logOut } = useAuth();
 
+    const handelLogOut = () => {
+        logOut()
+    }
 
     const NavLinks = <>
         <li className='text-lg font-bold mx-2'>
             <NavLink to={'/'} className={({ isActive }) =>
-                isActive ? " text-[#fd8813]" : " "} >Home</NavLink></li>
+                isActive ? " text-[#F36F21]" : " "} >Home</NavLink></li>
         <li className='text-lg font-bold mx-2'>
             <NavLink to={'/products'} className={({ isActive }) =>
-                isActive ? " text-[#fd8813]" : " "} >Products</NavLink></li>
+                isActive ? " text-[#F36F21]" : " "} >Products</NavLink></li>
 
-        <li className='text-lg font-bold mx-2'>
-            <NavLink to={'/login'} className={({ isActive }) =>
-                isActive ? " text-[#fd8813]" : " "} >Login</NavLink></li>
+        {
+            user ?
+                <div className="flex items-center mx-4 z-[9999]">
+                    <div className="dropdown dropdown-end ">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full border-black border-2">
+                                <img src={user.photoURL} />
+                            </div>
+                        </label>
+                        <ul tabIndex={0} className="mt-3 z-[1] p-3 shadow  menu-sm dropdown-content bg-base-100 rounded-box w-52 flex flex-col text-end space-y-2">
+                            <li><p className="text-lg font-semibold">{user.displayName}</p></li>
+                            <Link to={'/dashboard'}  className=" w-3/4 mx-auto text-white font-medium text-center bg-[#F36F21] px-1 py-1 rounded-md">Dashboard</Link>
+                            <button onClick={handelLogOut} className="text-white w-3/4 mx-auto font-medium bg-[#F36F21] px-1 py-1 rounded-md">Logout</button>
+                        </ul>
+                    </div>
+                </div>
+                :
+                <li className='text-lg font-bold mx-2'>
+                    <NavLink to={'/login'} className={({ isActive }) =>
+                        isActive ? " text-[#F36F21]" : " "} >Login</NavLink></li>
+        }
+
 
     </>
     return (
@@ -33,7 +57,7 @@ const Navbar = () => {
                             </div>
                             <div className="flex-1 px-2 mx-2"><img src={logo} alt="logo" /> </div>
                             <div className="flex-none hidden lg:block">
-                                <ul className=" menu-horizontal">
+                                <ul className=" menu-horizontal flex items-center">
                                     {/* Navbar menu content here */}
                                     {NavLinks}
                                 </ul>

@@ -37,10 +37,10 @@ const Banner = () => {
                         <div className="h-[calc(100vh-70px)] flex flex-col-reverse md:flex-row md:justify-between items-center py-20">
                             <div className="md:w-2/4 space-y-4">
                                 <p className="text-gray-400">Enhanced Technology</p>
-                                <h2 className='text-6xl text-[#fd8813]'>SMART <span className='text-black'>TV</span></h2>
+                                <h2 className='text-6xl text-[#F36F21]'>SMART <span className='text-black'>TV</span></h2>
                                 <p className='md:max-w-lg'>The ship set ground on the shore of this uncharted desert isle
                                     with Gilligan the Skipper too the millionaire and his story.</p>
-                                <button className='btn text-black bg-[#fd8813] hover:bg-transparent hover:border-[#fd8813] border-2'>View Details</button>
+                                <button className='btn text-black bg-[#F36F21] hover:bg-transparent hover:border-[#F36F21] border-2'>View Details</button>
                             </div>
                             <div className="">
                                 <img className='h-56 md:h-auto' src={img1} />
@@ -51,10 +51,10 @@ const Banner = () => {
                         <div className="h-[calc(100vh-70px)] flex flex-col-reverse md:flex-row md:justify-between items-center py-20 space-x-4">
                             <div className="md:w-2/4 space-y-4">
                                 <p className="text-gray-400">Enhanced Technology</p>
-                                <h2 className='text-6xl text-[#fd8813]'>SMART <span className='text-black'>TV</span></h2>
+                                <h2 className='text-6xl text-[#F36F21]'>SMART <span className='text-black'>TV</span></h2>
                                 <p className='md:max-w-lg'>The ship set ground on the shore of this uncharted desert isle
                                     with Gilligan the Skipper too the millionaire and his story.</p>
-                                <button className='btn text-black bg-[#fd8813] hover:bg-transparent hover:border-[#fd8813] border-2'>View Details</button>
+                                <button className='btn text-black bg-[#F36F21] hover:bg-transparent hover:border-[#F36F21] border-2'>View Details</button>
                             </div>
                             <div className="">
                                 <img className='h-56 md:h-auto' src={img2} />
@@ -65,10 +65,10 @@ const Banner = () => {
                         <div className="h-[calc(100vh-70px)] flex flex-col-reverse md:flex-row md:justify-between items-center py-20">
                             <div className="md:w-2/4 space-y-4">
                                 <p className="text-gray-400">Enhanced Technology</p>
-                                <h2 className='text-6xl text-[#fd8813]'>SMART <span className='text-black'>TV</span></h2>
+                                <h2 className='text-6xl text-[#F36F21]'>SMART <span className='text-black'>TV</span></h2>
                                 <p className='md:max-w-lg'>The ship set ground on the shore of this uncharted desert isle
                                     with Gilligan the Skipper too the millionaire and his story.</p>
-                                <button className='btn text-black bg-[#fd8813] hover:bg-transparent hover:border-[#fd8813] border-2'>View Details</button>
+                                <button className='btn text-black bg-[#F36F21] hover:bg-transparent hover:border-[#F36F21] border-2'>View Details</button>
                             </div>
                             <div className="">
                                 <img className='h-56 md:h-auto' src={img3} />
