@@ -1,0 +1,38 @@
+[
+    {
+        "product_image": "https://i.ibb.co/X81dm2N/02.png",
+        "product_name": "Smartphone X",
+        "tags": ["Electronics", "Gadgets", "Technology"],
+        "upvote_button": 105
+    },
+    {
+        "product_image": "https://i.ibb.co/nr7fj8P/3.png",
+        "product_name": "Wireless Headphones",
+        "tags": ["Audio", "Technology", "Accessories"],
+        "upvote_button": 92
+    },
+    {
+        "product_image": "https://i.ibb.co/X3WynVL/2.png",
+        "product_name": "Fitness Tracker",
+        "tags": ["Fitness", "Wearables", "Health"],
+        "upvote_button": 78
+    },
+    {
+        "product_image": "https://i.ibb.co/qgkMQVd/1.png",
+        "product_name": "Designer Watch",
+        "tags": ["Fashion", "Accessories", "Luxury"],
+        "upvote_button": 115
+    },
+    {
+        "product_image": "https://i.ibb.co/X81dm2N/02.png",
+        "product_name": "Coffee Maker",
+        "tags": ["Kitchen", "Appliances", "Coffee"],
+        "upvote_button": 63
+    },
+    {
+        "product_image": "https://i.ibb.co/nr7fj8P/3.png",
+        "product_name": "Smart Home Hub",
+        "tags": ["Home", "Automation", "Smart Devices"],
+        "upvote_button": 82
+    }
+]
