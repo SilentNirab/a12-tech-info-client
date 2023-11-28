@@ -8,6 +8,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Dashboard from "../Layouts/Dashboard.jsx"
 import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile.jsx";
 import DetailsPge from "../Pages/Product/DetailsPge.jsx";
+import PrivateRoute from "./PrivetRoute.jsx";
 
 
 export const routers = createBrowserRouter([
@@ -26,7 +27,7 @@ export const routers = createBrowserRouter([
             },
             {
                 path: '/product/:id',
-                element: <DetailsPge></DetailsPge>
+                element: <PrivateRoute><DetailsPge></DetailsPge></PrivateRoute>
             },
             {
                 path: '/login',
