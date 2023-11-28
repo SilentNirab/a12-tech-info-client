@@ -7,6 +7,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Dashboard from "../Layouts/Dashboard.jsx"
 import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile.jsx";
+import DetailsPge from "../Pages/Product/DetailsPge.jsx";
 
 
 export const routers = createBrowserRouter([
@@ -22,6 +23,10 @@ export const routers = createBrowserRouter([
             {
                 path: '/products',
                 element: <Product></Product>
+            },
+            {
+                path: '/product/:id',
+                element: <DetailsPge></DetailsPge>
             },
             {
                 path: '/login',

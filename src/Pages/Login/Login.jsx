@@ -3,19 +3,17 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import usePublicAxios from "../../Hooks/usePublicAxios";
 
 const Login = () => {
     const { register, handleSubmit, } = useForm();
     const navigate = useNavigate()
-    const {signIn, userProfileUpdate, googleSignIn} = useAuth()
+    const publicAxios = usePublicAxios()
+    const {signIn, googleSignIn} = useAuth()
     const onSubmit = data => {
         signIn(data.email, data.password)
         .then(result => {
             console.log(result.user);
-            userProfileUpdate(data.name, data.photoURL)
-            .then(
-                navigate('/')
-            )
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -28,22 +26,32 @@ const Login = () => {
             console.error(error);
         })
     }
-    const handelGoogleSignIn = () =>{
+    const handelGoogleSignIn = () => {
         googleSignIn()
-        .then(result =>{
-            console.log(result.user);
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "login successfully",
-                showConfirmButton: false,
-                timer: 1500
-              })
-            navigate('/')
-        })
-        .then(error =>{
-            console.error(error);
-        })
+            .then((result) => {
+                // create entry in db
+                const userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email
+                }
+                publicAxios.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedID) {
+                            console.log('user added to the database')
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'User created successfully.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+                navigate('/');
+            })
+            .then(error => {
+                console.error(error);
+            })
     }
     return (
         <div className=" min-h-screen flex items-center">

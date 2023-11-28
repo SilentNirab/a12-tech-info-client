@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
 import Container from "../../Components/Container";
 import { FcUp } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import useProducts from "../../Hooks/useProducts";
 
 
 const Product = () => {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('Products.json')
-            .then(res => res.json())
-            .then(data => setProducts(data.slice(0, 4)))
-    }, [])
+    const [product] = useProducts();
+    const products = product;
     return (
         <div className="my-10">
+            <Helmet>
+                <title>Tech-info | Products</title>
+            </Helmet>
             <Container>
                 <div className="text-3xl font-bold text-center mb-10">Our Products</div>
                 <div className="flex items-center max-w-md mx-auto bg-white rounded-lg">
@@ -31,10 +31,10 @@ const Product = () => {
                 </div>
                 <div className="grid grid-cols-4 gap-4 mt-10">
                     {
-                        products.map(product => <div key={product.indx} className="card bg-base-100 shadow-xl">
+                        products.map(product => <div key={product._id} className="card bg-base-100 shadow-xl">
                             <figure className="px-5 pt-5"><img className="h-56" src={product.product_image} alt="Movie" /></figure>
                             <div className="card-body">
-                                <Link><h2 className="card-title">{product.product_name}</h2></Link>
+                                <Link to={`/product/${product._id}`}><h2 className="card-title hover:text-[#ff833c]">{product.product_name}</h2></Link>
                                 <p>Click the button to watch on Jetflix app.</p>
                                 <div className="card-actions justify-end">
                                     <button className="btn text-black bg-[#F36F21] hover:bg-[#ff833c]">Up<FcUp></FcUp>({product.upvote_button}) </button>

@@ -3,47 +3,73 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import usePublicAxios from "../../Hooks/usePublicAxios";
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
-    const {createUser, userProfileUpdate, googleSignIn} = useAuth()
+    const publicAxios = usePublicAxios()
+    const { createUser, userProfileUpdate, reset, googleSignIn } = useAuth()
 
     const onSubmit = data => {
         createUser(data.email, data.password)
-        .then(result => {
-            console.log(result.user);
-            userProfileUpdate(data.name, data.photoURL)
-            .then(
-                navigate('/')
-            )
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Signup successfully",
-                showConfirmButton: false,
-                timer: 1500
+            .then(result => {
+                console.log(result.user);
+                userProfileUpdate(data.name, data.photoURL)
+                    .then(() => {
+                        // create entry in db
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        publicAxios.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedID) {
+                                    console.log('user added to the database')
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    
+                                }
+                            })
+                        navigate('/');    
+                    })
             })
-        })
-        .catch(error => {
-            console.error(error);
-        })
+            .catch(error => {
+                console.error(error);
+            })
     }
-    const handelGoogleSignIn = () =>{
+    const handelGoogleSignIn = () => {
         googleSignIn()
-        .then(result =>{
-            console.log(result.user);
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Signin successfully",
-                showConfirmButton: false,
-                timer: 1500
-              })
-            navigate('/')
-        })
-        .then(error =>{
-            console.error(error);
-        })
+            .then((result) => {
+                // create entry in db
+                const userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email
+                }
+                publicAxios.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedID) {
+                            console.log('user added to the database')
+                            reset();
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'User created successfully.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+                navigate('/');
+            })
+            .then(error => {
+                console.error(error);
+            })
     }
     return (
         <div className=" min-h-screen flex items-center">
@@ -56,11 +82,11 @@ const SignUp = () => {
                     <div className="mt-5">
                         <form onSubmit={handleSubmit(onSubmit)} action="">
                             <div className="relative mt-6">
-                                <input {...register("name",{required: true})} type="text" name="name" id="name" placeholder="Name" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                <input {...register("name", { required: true })} type="text" name="name" id="name" placeholder="Name" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
                                 <label htmlFor="name" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Name</label>
                             </div>
                             <div className="relative mt-6">
-                                <input type="email" {...register("email",{required: true})} name="email" id="email" placeholder="Email Address" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                <input type="email" {...register("email", { required: true })} name="email" id="email" placeholder="Email Address" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
                                 <label htmlFor="email" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Email Address</label>
                             </div>
                             <div className="relative mt-6">
