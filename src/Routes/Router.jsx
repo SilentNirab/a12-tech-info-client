@@ -5,6 +5,8 @@ import Product from "../Pages/Product/Product";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Dashboard from "../Layouts/Dashboard.jsx"
+import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile.jsx";
 
 
 export const routers = createBrowserRouter([
@@ -31,4 +33,15 @@ export const routers = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+            {
+                path: '/dashboard/',
+                element: <MyProfile></MyProfile>
+            }
+        ]
+    }
 ]);
