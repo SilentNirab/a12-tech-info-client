@@ -8,14 +8,17 @@ const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth();
     const location = useLocation();
 
-    if(loading){
-        return <progress className="progress w-56 bg-orange-500"></progress>
+    if (loading) {
+        return <div className="flex items-center justify-center min-h-screen">
+            <span className="loading loading-bars loading-lg text-warning mx-auto"></span>
+        </div>
+
     }
 
     if (user) {
         return children;
     }
-    return <Navigate to="/login" state={{from: location}} replace></Navigate>
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>
 };
 
 export default PrivateRoute;
