@@ -1,8 +1,10 @@
 import { FcMenu } from "react-icons/fc";
 import { NavLink, Outlet } from "react-router-dom";
 import logo from '../assets/images/logo.png'
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
+    const [isAdmin] = useAdmin();
     return (
         <div className="flex">
             {/* dashboard side bar */}
@@ -22,18 +24,35 @@ const Dashboard = () => {
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 min-h-full bg-[#F36F21] text-base-content">
                         {/* Sidebar content here */}
-                        <li>
-                            <NavLink to="/dashboard">
-                                User profile</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/addproduct">
-                                Add Product</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/myproduct">
-                                My product</NavLink>
-                        </li>
+                        {
+                            isAdmin ?
+                                <>
+                                    <li>
+                                        <NavLink to="/dashboard">
+                                            Profile</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/alluser">
+                                            User profile</NavLink>
+                                    </li>
+                                </>
+                                :
+                                <>
+                                    <li>
+                                        <NavLink to="/dashboard">
+                                             Profile</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/addproduct">
+                                            Add Product</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/myproduct">
+                                            My product</NavLink>
+                                    </li>
+                                </>
+
+                        }
 
                         {/* shared nav links */}
                         <div className="divider"></div>
