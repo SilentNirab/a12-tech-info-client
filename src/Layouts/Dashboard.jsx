@@ -24,7 +24,11 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
                         <li>
                             <NavLink to="/dashboard/userHome">
-                                User Home</NavLink>
+                                User profile</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/dashboard/addproduct">
+                                Add Product</NavLink>
                         </li>
 
                         {/* shared nav links */}

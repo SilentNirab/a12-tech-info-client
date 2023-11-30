@@ -9,6 +9,7 @@ import Dashboard from "../Layouts/Dashboard.jsx"
 import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile.jsx";
 import DetailsPge from "../Pages/Product/DetailsPge.jsx";
 import PrivateRoute from "./PrivetRoute.jsx";
+import AddProduct from "../Pages/Dashboard/Addproduct/AddProduct.jsx";
 
 
 export const routers = createBrowserRouter([
@@ -47,6 +48,10 @@ export const routers = createBrowserRouter([
             {
                 path: '/dashboard/',
                 element: <MyProfile></MyProfile>
+            },
+            {
+                path: '/dashboard/addproduct',
+                element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
             }
         ]
     }

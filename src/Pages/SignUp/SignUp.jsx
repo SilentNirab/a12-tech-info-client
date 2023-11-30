@@ -5,10 +5,10 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
     const navigate = useNavigate()
     const publicAxios = usePublicAxios()
-    const { createUser, userProfileUpdate, reset, googleSignIn } = useAuth()
+    const { createUser, userProfileUpdate, googleSignIn } = useAuth()
 
     const onSubmit = data => {
         createUser(data.email, data.password)

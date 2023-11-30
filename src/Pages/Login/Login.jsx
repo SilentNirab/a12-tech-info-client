@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 
 const Login = () => {
-    const { register, handleSubmit, } = useForm();
+    const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
     const publicAxios = usePublicAxios()
     const {signIn, googleSignIn} = useAuth()
