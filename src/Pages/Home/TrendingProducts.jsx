@@ -51,7 +51,7 @@ const TrendingProducts = () => {
                                 <figure className="px-5 pt-5"><img className="h-56" src={product.product_image} alt="Movie" /></figure>
                                 <div className="card-body">
                                     <Link to={`/product/${product._id}`}><h2 className="card-title hover:text-[#ff833c]">{product.product_name}</h2></Link>
-                                    <p>Click the button to watch on Jetflix app.</p>
+                                    <p></p>
                                     <div className="card-actions justify-end">
                                         <button className="btn text-black bg-[#F36F21] hover:bg-[#ff833c]">Up<FcUp></FcUp>({product.upvote_button}) </button>
                                     </div>

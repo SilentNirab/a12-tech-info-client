@@ -7,7 +7,7 @@ import useAuth from "../../Hooks/useAuth";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 import Swal from "sweetalert2";
 import useReviews from "../../Hooks/useReviews";
-import Votebutton from "../../Components/Votebutton";
+import { FcUp } from "react-icons/fc";
 
 const DetailsPge = () => {
     const { user } = useAuth();
@@ -55,12 +55,11 @@ const DetailsPge = () => {
                 <figure className="w-full" ><img src={productDetails.product_image} alt="car" /></figure>
                 <div className="card-body">
                     <h2 className="card-title font-bold text-2xl">{productDetails.product_name}</h2>
-                    <p className="text-lg font-normal">{productDetails.tag.map(obj => <span className="" key={obj.id}>{obj.text}</span>)}</p>
+                    <p className="text-lg font-normal">{productDetails.tag.map(obj => <span className="pr-2" key={obj.id}>{obj.text}</span>)}</p>
                     <p>{productDetails.description}</p>
                     <div className="card-actions justify-end">
-                        <Votebutton id={productDetails._id} vote={productDetails.upvote_button}></Votebutton>
+                    <button className="btn text-black bg-[#F36F21] hover:bg-[#ff833c]">Up<FcUp></FcUp>({product.upvote_button}) </button>
                     </div>
-                    
                 </div>
             </div>
             <div className="max-w-4xl m-auto">

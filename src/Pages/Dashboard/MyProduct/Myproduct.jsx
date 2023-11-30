@@ -6,10 +6,12 @@ import Swal from "sweetalert2";
 
 const Myproduct = () => {
     const { user } = useAuth();
-    const [product, refetch] = useProducts();
+    const [product, loading ,refetch] = useProducts();
     const publicAxios = usePublicAxios();
     const myproduct = product.filter(item => item.user_email === user.email)
-    console.log(myproduct);
+    if (loading) {
+        refetch
+    }
 
     const handelDelete = (id) => {
         Swal.fire({
@@ -22,11 +24,11 @@ const Myproduct = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
+                refetch();
                 publicAxios.delete(`/product/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
-                            refetch();
+
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
