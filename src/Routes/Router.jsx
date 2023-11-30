@@ -12,6 +12,8 @@ import PrivateRoute from "./PrivetRoute.jsx";
 import AddProduct from "../Pages/Dashboard/Addproduct/AddProduct.jsx";
 import Myproduct from "../Pages/Dashboard/MyProduct/Myproduct.jsx";
 import UpdateProduct from "../Pages/Dashboard/UpdateProduct/UpdateProduct.jsx";
+import AllUsers from "../Pages/Dashboard/AllUser/AllUser.jsx";
+import AdminRoute from "./AdminRoute.jsx";
 
 
 export const routers = createBrowserRouter([
@@ -62,6 +64,10 @@ export const routers = createBrowserRouter([
             {
                 path: '/dashboard/myproduct/:id',
                 element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>
+            },
+            {
+                path: '/dashboard/alluser',
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
             }
         ]
     }

@@ -4,7 +4,7 @@ import usePublicAxios from "./usePublicAxios";
 const useProducts = () => {
     const publicAxios = usePublicAxios();
 
-    const {data: product = [], isPending: loading, refetch} = useQuery({
+    const {isPending: loading, data: product = [],  refetch} = useQuery({
         queryKey: ['products'], 
         queryFn: async() =>{
             const res = await publicAxios.get('/products');

@@ -32,8 +32,8 @@ const Dashboard = () => {
                                             Profile</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/alluser">
-                                            User profile</NavLink>
+                                        <NavLink to="/dashboard/alluser">
+                                            All User</NavLink>
                                     </li>
                                 </>
                                 :

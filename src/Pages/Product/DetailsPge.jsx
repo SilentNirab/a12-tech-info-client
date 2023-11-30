@@ -19,7 +19,7 @@ const DetailsPge = () => {
     const [review, refetch] = useReviews();
     const reviews = review.filter(item => item.product_id === id)
     if (loading) {
-        return
+        return 
     }
 
     const handleReview = e => {
@@ -55,7 +55,7 @@ const DetailsPge = () => {
                 <figure className="w-full" ><img src={productDetails.product_image} alt="car" /></figure>
                 <div className="card-body">
                     <h2 className="card-title font-bold text-2xl">{productDetails.product_name}</h2>
-                    <p className="text-lg font-normal">{productDetails.tag.map(obj => <span className="pr-2" key={obj.id}>{obj.text}</span>)}</p>
+                    <p className="text-lg font-normal">{}</p>
                     <p>{productDetails.description}</p>
                     <div className="card-actions justify-end">
                     <button className="btn text-black bg-[#F36F21] hover:bg-[#ff833c]">Up<FcUp></FcUp>({product.upvote_button}) </button>
