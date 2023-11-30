@@ -4,14 +4,14 @@ import usePublicAxios from "./usePublicAxios";
 const useProducts = () => {
     const publicAxios = usePublicAxios();
 
-    const {data: product = [], isPending: loading, refetch} = useQuery({
+    const {refetch: refetch, data: product = [], } = useQuery({
         queryKey: ['products'], 
         queryFn: async() =>{
             const res = await publicAxios.get('/products');
             return res.data;
         }
     })
-    return [product, loading, refetch]
+    return [product, refetch]
 };
 
 export default useProducts;

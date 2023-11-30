@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import usePublicAxios from "../../../Hooks/usePublicAxios";
 import Tags from "./Tag/Tags";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
     const { user } = useAuth()
@@ -13,23 +14,33 @@ const AddProduct = () => {
     const handelAddProduct = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-        const image = form.get("image");
-        const name = form.get("name");
+        const product_image = form.get("image");
+        const product_name = form.get("name");
         const description = form.get("description");
         const tag = tags;
         const user_name = user.displayName;
         const user_photo = user.photoURL;
         const user_email = user.email;
 
-        const product = { image, name, tag, description, user_name, user_photo, user_email };
-        console.log(product);
+        const product = { product_image, product_name, tag, description, user_name, user_photo, user_email };
         // send data to the server
 
         publicAxios.post('/products', product)
             .then(res => {
                 console.log(res.data);
-
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Product added successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
             })
+            .catch(error => {
+                console.error("Error adding product:", error);
+            });
     }
     return (
         <div>

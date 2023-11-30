@@ -55,10 +55,12 @@ const DetailsPge = () => {
                 <figure className="w-full" ><img src={productDetails.product_image} alt="car" /></figure>
                 <div className="card-body">
                     <h2 className="card-title font-bold text-2xl">{productDetails.product_name}</h2>
-                    <p className="text-lg font-normal">{productDetails.tags}</p>
+                    <p className="text-lg font-normal">{productDetails.tag.map(obj => <span className="" key={obj.id}>{obj.text}</span>)}</p>
+                    <p>{productDetails.description}</p>
                     <div className="card-actions justify-end">
                         <Votebutton id={productDetails._id} vote={productDetails.upvote_button}></Votebutton>
                     </div>
+                    
                 </div>
             </div>
             <div className="max-w-4xl m-auto">

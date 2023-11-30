@@ -23,12 +23,16 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 min-h-full bg-[#F36F21] text-base-content">
                         {/* Sidebar content here */}
                         <li>
-                            <NavLink to="/dashboard/userHome">
+                            <NavLink to="/dashboard">
                                 User profile</NavLink>
                         </li>
                         <li>
                             <NavLink to="/dashboard/addproduct">
                                 Add Product</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/dashboard/myproduct">
+                                My product</NavLink>
                         </li>
 
                         {/* shared nav links */}

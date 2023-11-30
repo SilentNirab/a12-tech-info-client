@@ -10,6 +10,7 @@ import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile.jsx";
 import DetailsPge from "../Pages/Product/DetailsPge.jsx";
 import PrivateRoute from "./PrivetRoute.jsx";
 import AddProduct from "../Pages/Dashboard/Addproduct/AddProduct.jsx";
+import Myproduct from "../Pages/Dashboard/MyProduct/Myproduct.jsx";
 
 
 export const routers = createBrowserRouter([
@@ -46,12 +47,16 @@ export const routers = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
-                path: '/dashboard/',
+                path: '/dashboard',
                 element: <MyProfile></MyProfile>
             },
             {
                 path: '/dashboard/addproduct',
                 element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
+            },
+            {
+                path: '/dashboard/myproduct',
+                element: <Myproduct></Myproduct>
             }
         ]
     }
